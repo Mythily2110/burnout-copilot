@@ -274,10 +274,16 @@ export function calculateBurnout(employee) {
 
   const roundedScore = Math.min(100, Math.max(0, Math.round(score)));
 
+  let riskLevel = 'Low';
+  if (roundedScore >= 70) {
+    riskLevel = 'High';
+  } else if (roundedScore >= 40) {
+    riskLevel = 'Medium';
+  }
+
   return {
     score: roundedScore,
-    riskLevel:
-      roundedScore < 40 ? 'Low' : roundedScore < 70 ? 'Medium' : 'High',
+    riskLevel,
   };
 }
 

@@ -45,7 +45,12 @@ function SummaryCard({ title, icon, color, count, caption }) {
 export default function SummaryCards({ employees }) {
   const counts = employees.reduce(
     (acc, employee) => {
-      acc[employee.riskLevel] += 1;
+      const riskLevel = employee.burnout?.riskLevel ?? employee.riskLevel;
+
+      if (riskLevel && acc[riskLevel] !== undefined) {
+        acc[riskLevel] += 1;
+      }
+
       return acc;
     },
     { High: 0, Medium: 0, Low: 0 },
